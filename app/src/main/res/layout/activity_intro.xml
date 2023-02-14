@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/introbg"
+    tools:context=".activities.IntroActivity">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/ImageIntro"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:src="@drawable/undraw_teacher_re_sico"/>
+
+    <TextView
+        android:id="@+id/mainText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="Welcome to QUIZZY"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="30dp"/>
+
+    <TextView
+        android:id="@+id/introText"
+        style="@style/TextAppearance.AppCompat.Subhead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:text="Life is is journey of finding answer to our question" />
+
+
+
+
+
+    <Button
+        android:id="@+id/IntroBtn"
+        android:layout_width="200dp"
+        android:layout_marginVertical="100dp"
+        android:background="@drawable/primarybtn"
+        android:layout_height="wrap_content"
+        android:text="Get Started"
+        android:layout_margin="30dp"/>
+</LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/wave"
+        android:layout_alignParentBottom="true" />
+
+
+</RelativeLayout>
