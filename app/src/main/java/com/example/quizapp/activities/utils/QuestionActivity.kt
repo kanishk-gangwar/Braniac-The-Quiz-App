@@ -57,7 +57,6 @@ class QuestionActivity : AppCompatActivity() {
             firestore.collection("Quizzes").whereEqualTo("title",date)
                 .get()
                 .addOnSuccessListener {
-
                     if (it != null && !it.isEmpty){
                         quizzes = it.toObjects(Quiz::class.java)
                         questions = quizzes!![0].questions
@@ -73,14 +72,15 @@ class QuestionActivity : AppCompatActivity() {
         btnprevious.visibility = View.GONE
         btnSubmit.visibility = View.GONE
 
-        if (index == 1){
+        val questionCount = questions?.size ?: 0
+        if (questionCount == 1) {
+            btnSubmit.visibility = View.VISIBLE
+        } else if (index == 1) {
             btnNext.visibility = View.VISIBLE
-        }
-        else if(index == questions!!.size){
+        } else if (index == questionCount) {
             btnSubmit.visibility = View.VISIBLE
             btnprevious.visibility = View.VISIBLE
-        }
-        else{
+        } else {
             btnprevious.visibility = View.VISIBLE
             btnNext.visibility = View.VISIBLE
         }
@@ -88,12 +88,11 @@ class QuestionActivity : AppCompatActivity() {
         val question = questions!!["question$index"]
         question?.let {
             description.text = it.description
-            val optionAdapter = OptionAdapter(this,it)
+            val optionAdapter = OptionAdapter(this, it)
             optionList.layoutManager = LinearLayoutManager(this)
             optionList.adapter = optionAdapter
             optionList.setHasFixedSize(true)
         }
-
-
     }
+
 }

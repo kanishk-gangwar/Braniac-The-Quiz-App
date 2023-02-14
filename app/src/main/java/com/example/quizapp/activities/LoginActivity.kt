@@ -1,5 +1,6 @@
 package com.example.quizapp.activities
 
+import android.app.Dialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -36,23 +37,34 @@ class LoginActivity : AppCompatActivity() {
         }
         LogInBtn.setOnClickListener {
             val email = Email.text.toString()
-            val Password = Password.text.toString()
+            val password = Password.text.toString()
+            val custompgbar = Dialog(this)
+            custompgbar.setContentView(R.layout.custompgbar)
+            custompgbar.setCanceledOnTouchOutside(false)
+            custompgbar.show()
 
-            if (email.isBlank() || Password.isBlank()) {
+            if (email.isBlank() || password.isBlank()) {
                 Toast.makeText(this, "Details can't be blank", Toast.LENGTH_SHORT).show()
+                custompgbar.dismiss()
 
             } else {
-                firebaseAuth.signInWithEmailAndPassword(email, Password).addOnCompleteListener {
+                firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
                     if (it.isSuccessful) {
+                        Email.text.clear()
+                        Password.text.clear()
                         val intent = Intent(this, MainActivity::class.java)
+                        custompgbar.dismiss()
                         startActivity(intent)
                         Toast.makeText(this, "Logged In successfully", Toast.LENGTH_SHORT).show()
                         finish()
 
                     }
                     else{
-                        Toast.makeText(this,"Error Logging In", Toast.LENGTH_SHORT).show()
-                        finish()
+                        Toast.makeText(this,"Error Logging In Or Details don't exist", Toast.LENGTH_SHORT).show()
+                        Email.text.clear()
+                        Password.text.clear()
+                        custompgbar.dismiss()
+
                     }
                 }
 

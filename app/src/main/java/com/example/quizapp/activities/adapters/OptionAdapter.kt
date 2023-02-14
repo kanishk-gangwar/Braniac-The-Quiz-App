@@ -13,7 +13,7 @@ import com.example.quizapp.activities.models.Questions
 class OptionAdapter (val context: Context,val questions: Questions) :
     RecyclerView.Adapter<OptionAdapter.OptionViewHolder>(){
 
-    private var options : List<String> = listOf(questions.option1,questions.option2,questions.option3,questions.option4)
+    public var options : List<String> = listOf(questions.option1,questions.option2,questions.option3,questions.option4)
 
     inner class OptionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         var optionView = itemView.findViewById<TextView>(R.id.QuizOption)

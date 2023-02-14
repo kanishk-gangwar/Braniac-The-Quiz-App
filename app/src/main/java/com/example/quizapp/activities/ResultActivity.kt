@@ -37,14 +37,17 @@ class ResultActivity : AppCompatActivity() {
     }
 
     private fun calculateScore() {
-        var score = 0
-        for (entry in quiz.questions.entries) {
+        var correctAnswer : Int = 1
+
+        quiz.questions.entries.forEach { entry ->
             val question = entry.value
             if (question.answer == question.userAnswer) {
-                score += 10
+                correctAnswer++
             }
-            Log.d("abhay","$score")
+            Log.d("abhay", "$correctAnswer")
         }
+
+        var score : Int = correctAnswer * 10
         txtScore.text = "Your Score : $score"
 
     }

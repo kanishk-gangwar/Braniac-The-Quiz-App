@@ -1,5 +1,6 @@
 package com.example.quizapp.activities
 
+import android.content.ContentValues
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,8 +16,11 @@ import com.example.quizapp.activities.adapters.QuizAdapter
 import com.example.quizapp.activities.models.Quiz
 import com.example.quizapp.activities.utils.QuestionActivity
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_profile.*
+import kotlinx.android.synthetic.main.drawer_header.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -27,14 +31,22 @@ class MainActivity : AppCompatActivity() {
     private var quizlist = mutableListOf<Quiz>()
     lateinit var firestore: FirebaseFirestore
     lateinit var btnProfile : Button
+    lateinit var firebaseAuth : FirebaseAuth
+    val db = FirebaseFirestore.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        firebaseAuth = FirebaseAuth.getInstance()
 
         setUpViews()
+        click.setOnClickListener {
+            val intent = Intent(this,ProfileActivity::class.java)
+            startActivity(intent)
+        }
 
     }
+
+
 
    fun setUpViews() {
        setUpDrawerLayout()
@@ -82,7 +94,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpRecyclerView() {
-              adapter = QuizAdapter(this,quizlist)
+        adapter = QuizAdapter(this,quizlist)
         quizRecyclerview.layoutManager = GridLayoutManager(this,2)
         quizRecyclerview.adapter = adapter
 
@@ -92,13 +104,16 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(appBar)
         toggle = ActionBarDrawerToggle(this,drawerlayout, R.string.app_name, R.string.app_name)
         toggle.syncState()
+        getdata()
         NavigationView.setNavigationItemSelectedListener {
 
 
             when(it.itemId){
-                R.id.btnprofile -> {val intent = Intent(this,ProfileActivity::class.java)
+                R.id.btnLgOut -> {
+                    firebaseAuth.signOut()
+                    val intent = Intent(this,LoginActivity::class.java)
                     startActivity(intent)
-                    drawerlayout.closeDrawers()
+                    finish()
                 }
 
                 R.id.btnfollow -> Toast.makeText(applicationContext,"Follow us",Toast.LENGTH_SHORT).show()
@@ -114,6 +129,26 @@ class MainActivity : AppCompatActivity() {
             return true
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun getdata() {
+        val text = firebaseAuth.currentUser!!.email
+        val docRef = db.collection("User").document(text.toString())
+        docRef.get()
+            .addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    val name = document.getString("Name")
+                    val email = document.getString("Email")
+                    UserName.text = name
+                    Emailtxt.text = email
+                    // Use the name field as needed
+                } else {
+                    Log.d(ContentValues.TAG, "User document does not exist on the database")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d(ContentValues.TAG, "Failed to retrieve user document: $exception")
+            }
     }
 
 

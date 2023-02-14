@@ -2,12 +2,18 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <item
+        android:title="Log Out"
+        android:id="@+id/btnLgOut"
+        android:icon="@drawable/logout"/>
+
     <item android:title="Follow us"
           android:icon="@drawable/baseline_loyalty_24"
         android:id="@+id/btnfollow"/>
-    <item android:title="Profile"
-        android:icon="@drawable/baseline_person_24"
-        android:id="@+id/btnprofile"/>
+<!--    <item android:title="Profile"-->
+<!--        android:icon="@drawable/baseline_person_24"-->
+<!--        android:id="@+id/btnprofile"/>-->
+
     <item
         android:title="Rate Us"
         android:icon="@drawable/rateus"

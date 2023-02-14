@@ -5,42 +5,95 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
     tools:context=".activities.ProfileActivity">
 
     <LinearLayout
-        android:id="@+id/profile_header_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#DF6262"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="32dp">
-
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/profile" />
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/txtEmail"
-            style="@style/TextAppearance.AppCompat.Body2"
+            android:layout_marginTop="15dp"
+            android:padding="15dp"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Number of Entries"/>
+<LinearLayout
+    android:gravity="center_horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+        <Spinner
+            android:padding="10dp"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:id="@+id/spinner"
+            android:gravity="center"/>
+
+
+</LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:padding="10dp"
+            android:layout_marginTop="5dp"
+            android:id="@+id/textField6"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/customdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:padding="15dp"
+            android:layout_marginTop="5dp"
+            android:id="@+id/textField2"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Enter the number of question">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/numberOfEntries"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        <Button
+            android:id="@+id/generateButton"
+            android:layout_marginTop="10dp"
+            android:text="Generate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            tools:text="cheezycode@gmail.com"
-            android:textColor="@android:color/white" />
+            android:layout_gravity="center"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/editTextContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"/>
+
+        </ScrollView>
+
+
     </LinearLayout>
 
-
-    <Button
-        android:id="@+id/btnLogout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="32dp"
-        android:background="@drawable/primarybtn"
-        android:text="Log Out" />
 
 
 </LinearLayout>

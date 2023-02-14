@@ -5,22 +5,35 @@
     android:orientation="vertical"
     android:background="#F4CEBD"
     android:layout_width="match_parent"
-    android:padding="16dp"
+    android:padding="20dp"
     android:layout_height="match_parent">
 
 
     <ImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:id="@+id/UserImage"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         android:scaleType="fitXY"
-        android:src="@drawable/logo"/>
+        android:src="@drawable/profile"/>
 
     <TextView
-        style="@style/TextAppearance.AppCompat.Subhead"
+        android:id="@+id/UserName"
+        style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Quiz Yourself Daily" />
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:text="UserName"/>
+
+    <TextView
+        android:id="@+id/Emailtxt"
+        style="@style/TextAppearance.AppCompat.Subhead"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
+        android:text="UserEmail"/>
 
 
 </LinearLayout>

@@ -25,10 +25,11 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_marginTop="20dp"
-        android:text="Welcome to QUIZZY"
+        android:text="Welcome to BRANIAC"
         android:textStyle="bold"
         android:textColor="@color/black"
-        android:textSize="30dp"/>
+        android:fontFamily="@font/arbutus"
+        android:textSize="25dp"/>
 
     <TextView
         android:id="@+id/introText"
@@ -37,7 +38,9 @@
         android:layout_height="wrap_content"
         android:textStyle="bold"
         android:layout_marginTop="20dp"
-        android:text="Life is is journey of finding answer to our question" />
+        android:fontFamily="@font/days_one"
+        android:textSize="14dp"
+        android:text="Life is a journey of finding answer to our question" />
 
 
 
