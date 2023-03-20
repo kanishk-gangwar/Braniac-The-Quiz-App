@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="preloaded_fonts" translatable="false">
+        <item>@font/alegreya_sc_bold_italic</item>
+        <item>@font/aleo_bold_italic</item>
+        <item>@font/aleo_italic</item>
         <item>@font/amaranth_bold_italic</item>
+        <item>@font/anton</item>
         <item>@font/arbutus</item>
+        <item>@font/brygada_1918_semibold</item>
         <item>@font/days_one</item>
+        <item>@font/federant</item>
+        <item>@font/tienne_bold</item>
     </array>
 </resources>

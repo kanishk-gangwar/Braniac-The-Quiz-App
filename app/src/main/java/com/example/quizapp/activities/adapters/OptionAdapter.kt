@@ -13,7 +13,7 @@ import com.example.quizapp.activities.models.Questions
 class OptionAdapter (val context: Context,val questions: Questions) :
     RecyclerView.Adapter<OptionAdapter.OptionViewHolder>(){
 
-    public var options : List<String> = listOf(questions.option1,questions.option2,questions.option3,questions.option4)
+    var options : List<String> = listOf(questions.option1,questions.option2,questions.option3,questions.option4)
 
     inner class OptionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         var optionView = itemView.findViewById<TextView>(R.id.QuizOption)
@@ -36,7 +36,7 @@ class OptionAdapter (val context: Context,val questions: Questions) :
             notifyDataSetChanged()
         }
         if (questions.userAnswer == options[position]){
-            holder.itemView.setBackgroundResource(R.drawable.option_item_selected_bg)
+            holder.itemView.setBackgroundResource(R.drawable.option_bg)
         }
         else{
             holder.itemView.setBackgroundResource(R.drawable.option_item_bg)

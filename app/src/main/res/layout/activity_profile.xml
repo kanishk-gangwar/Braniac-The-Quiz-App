@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/gradientbackground"
     tools:context=".activities.ProfileActivity">
 
     <LinearLayout
@@ -13,29 +14,32 @@
         android:orientation="vertical">
 
         <TextView
-            android:layout_marginTop="15dp"
-            android:padding="15dp"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Number of Entries"/>
-<LinearLayout
-    android:gravity="center_horizontal"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-
-        <Spinner
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/aleo_bold_italic"
             android:padding="10dp"
-            android:layout_width="300dp"
-            android:layout_height="60dp"
-            android:id="@+id/spinner"
-            android:gravity="center"/>
+            android:text="Make Quiz by Entering Questions"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
+        <LinearLayout
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-</LinearLayout>
+            <Spinner
+                android:background="@drawable/option_item_selected_bg"
+                android:padding="5dp"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:id="@+id/spinner"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:padding="10dp"
@@ -47,13 +51,14 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/customdate"
+                android:hint="Today's Date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:padding="15dp"
+            android:padding="10dp"
             android:layout_marginTop="5dp"
             android:id="@+id/textField2"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -69,8 +74,6 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-
-
         <Button
             android:id="@+id/generateButton"
             android:layout_marginTop="10dp"
@@ -78,22 +81,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"/>
+        <Button
+            android:id="@+id/Save"
+            android:layout_marginVertical="20dp"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save Quiz" />
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:id="@+id/editTextContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"/>
+            <LinearLayout
+                android:id="@+id/editTextContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"/>
 
         </ScrollView>
-
 
     </LinearLayout>
 
 
 
-</LinearLayout>
+
+    </LinearLayout>

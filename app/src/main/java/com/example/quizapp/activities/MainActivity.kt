@@ -2,14 +2,22 @@ package com.example.quizapp.activities
 
 import android.content.ContentValues
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.Typeface
+import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.LayerDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.GestureDetector
+import android.view.Gravity
 import android.view.MenuItem
-import android.widget.Button
-import android.widget.GridLayout
-import android.widget.Toast
+import android.view.MotionEvent
+import android.widget.*
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.cardview.widget.CardView
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.quizapp.R
 import com.example.quizapp.activities.adapters.QuizAdapter
@@ -21,11 +29,15 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.drawer_header.*
+import java.io.FileInputStream
+import java.io.IOException
+import java.io.ObjectInputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
+    private val texts = arrayOf("Select Category","Science","GK","Maths","Social Science","English")
     private lateinit var toggle: ActionBarDrawerToggle
     lateinit var adapter: QuizAdapter
     private var quizlist = mutableListOf<Quiz>()
@@ -33,96 +45,112 @@ class MainActivity : AppCompatActivity() {
     lateinit var btnProfile : Button
     lateinit var firebaseAuth : FirebaseAuth
     val db = FirebaseFirestore.getInstance()
+    private lateinit var gestureDetector: GestureDetector
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         firebaseAuth = FirebaseAuth.getInstance()
 
+
+
+        Categoryclicks()
         setUpViews()
         click.setOnClickListener {
-            val intent = Intent(this,ProfileActivity::class.java)
+            val intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
         }
-
-    }
-
-
-
-   fun setUpViews() {
-       setUpDrawerLayout()
-       setUpRecyclerView()
-       setUpFireStore()
-       setUpDatePicker()
-    }
-
-    private fun setUpDatePicker() {
-          btndatepicker.setOnClickListener {
-              val datePicker = MaterialDatePicker.Builder.datePicker().build()
-              datePicker.show(supportFragmentManager,"DatePicker")
-              datePicker.addOnPositiveButtonClickListener {
-                  Log.d("DATEPICKER",datePicker.headerText)
-                  val dateformatter = SimpleDateFormat("dd-MM-yyyy")
-                  val date = dateformatter.format(Date(it))
-                  val intent = Intent(this,QuestionActivity::class.java)
-                  intent.putExtra("DATE",date)
-                  startActivity(intent)
-                  Toast.makeText(this,"$date",Toast.LENGTH_SHORT).show()
-              }
-              datePicker.addOnNegativeButtonClickListener {
-                  Log.d("DATEPICKER",datePicker.headerText)
-              }
-              datePicker.addOnCancelListener {
-                  Log.d("DATEPICKER","Date Picker Cancelled")
-              }
-          }
-
-    }
-
-    private fun setUpFireStore() {
-       firestore = FirebaseFirestore.getInstance()
-        val collectionReference = firestore.collection("Quizzes")
-        collectionReference.addSnapshotListener { value, error ->
-            if(value == null || error != null){
-                Toast.makeText(this,"Error Fetching data",Toast.LENGTH_SHORT).show()
-                return@addSnapshotListener
-            }
-            Log.d("DATA",value.toObjects(Quiz::class.java).toString())
-           // quizlist.clear()
-            quizlist.addAll(value.toObjects(Quiz::class.java))
-            adapter.notifyDataSetChanged()
+        Drawermenu.setOnClickListener {
+            drawerlayout.openDrawer(GravityCompat.START)
         }
-    }
-
-    private fun setUpRecyclerView() {
-        adapter = QuizAdapter(this,quizlist)
-        quizRecyclerview.layoutManager = GridLayoutManager(this,2)
-        quizRecyclerview.adapter = adapter
 
     }
 
-    fun setUpDrawerLayout() {
-        setSupportActionBar(appBar)
-        toggle = ActionBarDrawerToggle(this,drawerlayout, R.string.app_name, R.string.app_name)
+    private fun Categoryclicks() {
+        science.setOnClickListener {
+            val myString = "Science"
+            val intent = Intent(this, QuizAcitvity::class.java)
+            intent.putExtra("MY_STRING", myString)
+            startActivity(intent)
+        }
+        maths.setOnClickListener {
+            val myString = "Maths"
+            val intent = Intent(this, QuizAcitvity::class.java)
+            intent.putExtra("MY_STRING", myString)
+            startActivity(intent)
+
+        }
+        socialScience.setOnClickListener {
+            val myString = "Social Science"
+            val intent = Intent(this, QuizAcitvity::class.java)
+            intent.putExtra("MY_STRING", myString)
+            startActivity(intent)
+
+        }
+        gk.setOnClickListener {
+            val myString = "GK"
+            val intent = Intent(this, QuizAcitvity::class.java)
+            intent.putExtra("MY_STRING", myString)
+            startActivity(intent)
+
+        }
+        english.setOnClickListener {
+            val myString = "English"
+            val intent = Intent(this, QuizAcitvity::class.java)
+            intent.putExtra("MY_STRING", myString)
+            startActivity(intent)
+
+        }
+
+    }
+
+
+    fun setUpViews() {
+       setUpDrawerLayout()
+
+    }
+
+
+    private fun setUpDrawerLayout() {
+         gestureDetector = GestureDetector(this, object : GestureDetector.SimpleOnGestureListener() {
+            override fun onFling(
+                e1: MotionEvent,
+                e2: MotionEvent,
+                velocityX: Float,
+                velocityY: Float
+            ): Boolean {
+                // Swipe from left to right
+                if (e1 != null && e2 != null && e1.x < e2.x && e2.x - e1.x > 125) {
+                    drawerlayout.openDrawer(GravityCompat.START)
+                }
+                return super.onFling(e1!!, e2!!, velocityX, velocityY)
+            }
+        })
+
+        drawerlayout.setOnTouchListener { _, event -> gestureDetector.onTouchEvent(event) }
+
+        toggle = ActionBarDrawerToggle(this, drawerlayout, 0, R.string.app_name)
         toggle.syncState()
         getdata()
         NavigationView.setNavigationItemSelectedListener {
-
-
-            when(it.itemId){
+            when (it.itemId) {
                 R.id.btnLgOut -> {
                     firebaseAuth.signOut()
-                    val intent = Intent(this,LoginActivity::class.java)
+                    val intent = Intent(this, LoginActivity::class.java)
                     startActivity(intent)
                     finish()
                 }
-
-                R.id.btnfollow -> Toast.makeText(applicationContext,"Follow us",Toast.LENGTH_SHORT).show()
-                R.id.btnRate -> Toast.makeText(applicationContext,"Rate us",Toast.LENGTH_SHORT).show()
+                R.id.btnfollow -> Toast.makeText(applicationContext, "Follow us", Toast.LENGTH_SHORT).show()
+                R.id.btnRate -> Toast.makeText(applicationContext, "Rate us", Toast.LENGTH_SHORT).show()
+                R.id.btnLeaderBoard -> {
+                    val intent = Intent(this, LeaderBoard::class.java)
+                    startActivity(intent)
+                }
             }
             true
-
         }
     }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (toggle.onOptionsItemSelected(item)){
@@ -150,6 +178,17 @@ class MainActivity : AppCompatActivity() {
                 Log.d(ContentValues.TAG, "Failed to retrieve user document: $exception")
             }
     }
+
+    fun CardView.setStroke(width: Int, color: Int) {
+        val strokeWidth = resources.displayMetrics.density * width
+        val strokeDrawable = GradientDrawable()
+        strokeDrawable.setStroke(strokeWidth.toInt(), color)
+        strokeDrawable.cornerRadius = radius
+        val layers = arrayOf(strokeDrawable, background)
+        val layerDrawable = LayerDrawable(layers)
+        setBackground(layerDrawable)
+    }
+
 
 
 }

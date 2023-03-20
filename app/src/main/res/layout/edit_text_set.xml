@@ -22,6 +22,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/description"
             android:layout_width="match_parent"
+            android:inputType="text"
+            android:imeOptions="actionNext"
             android:layout_height="wrap_content"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -38,6 +40,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/option1"
             android:layout_width="match_parent"
+            android:inputType="text"
+            android:imeOptions="actionNext"
             android:layout_height="wrap_content"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -53,6 +57,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/option2"
             android:layout_width="match_parent"
+            android:inputType="text"
+            android:imeOptions="actionNext"
             android:layout_height="wrap_content"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -68,6 +74,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/option3"
             android:layout_width="match_parent"
+            android:inputType="text"
+            android:imeOptions="actionNext"
             android:layout_height="wrap_content"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -83,6 +91,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/option4"
             android:layout_width="match_parent"
+            android:inputType="text"
+            android:imeOptions="actionNext"
             android:layout_height="wrap_content"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -98,6 +108,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/correctAnswer"
             android:layout_width="match_parent"
+            android:inputType="text"
+            android:imeOptions="actionNext"
             android:layout_height="wrap_content"/>
 
     </com.google.android.material.textfield.TextInputLayout>

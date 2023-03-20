@@ -15,6 +15,8 @@ import com.example.quizapp.activities.models.Quiz
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_question.*
+import kotlinx.android.synthetic.main.activity_question.description
+import kotlinx.android.synthetic.main.edit_text_set.*
 
 class QuestionActivity : AppCompatActivity() {
 
@@ -27,6 +29,8 @@ class QuestionActivity : AppCompatActivity() {
         setContentView(R.layout.activity_question)
         setUpFirestore()
         setUpEventListener()
+
+
     }
 
     private fun setUpEventListener() {
@@ -53,8 +57,9 @@ class QuestionActivity : AppCompatActivity() {
     private fun setUpFirestore() {
         val firestore = FirebaseFirestore.getInstance()
         var date = intent.getStringExtra("DATE")
+        var myString = intent.getStringExtra("MY_STRING").toString()
         if(date != null){
-            firestore.collection("Quizzes").whereEqualTo("title",date)
+            firestore.collection(myString).whereEqualTo("title",date)
                 .get()
                 .addOnSuccessListener {
                     if (it != null && !it.isEmpty){

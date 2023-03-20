@@ -18,4 +18,11 @@
         android:title="Rate Us"
         android:icon="@drawable/rateus"
         android:id="@+id/btnRate"/>
+
+    <item
+        android:title="Leader Board"
+        android:icon="@drawable/leaderboard"
+        android:id="@+id/btnLeaderBoard"/>
+
+
 </menu>

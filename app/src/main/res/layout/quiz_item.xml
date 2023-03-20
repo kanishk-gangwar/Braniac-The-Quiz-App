@@ -5,7 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="160dp"
     android:id="@+id/cardcontainer"
+    app:cardCornerRadius="25dp"
     android:elevation="16dp"
+    android:outlineAmbientShadowColor="@color/black"
+    android:outlineSpotShadowColor="@color/black"
     android:layout_margin="8dp">
     
     <LinearLayout
@@ -23,8 +26,11 @@
             app:tint="@android:color/white"/>
         
         <TextView
+            android:layout_marginTop="10dp"
             android:id="@+id/quizTitle"
             android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
