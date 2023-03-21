@@ -13,7 +13,9 @@
         android:id="@+id/description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
         android:fontFamily="@font/brygada_1918_semibold"
+        android:gravity="center"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -24,6 +26,7 @@
     <Button
         android:visibility="invisible"
         android:id="@+id/btnprevious"
+        android:background="@drawable/primarybtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -43,6 +46,7 @@
     <Button
         android:visibility="invisible"
         android:id="@+id/btnNext"
+        android:background="@drawable/primarybtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -58,20 +62,33 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.8"/>
-    
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/optionList"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="28dp"
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/horizontalguideline"
         app:layout_constraintEnd_toEndOf="@+id/description"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/description"
-        app:layout_constraintTop_toBottomOf="@id/description"/>
-    
+        app:layout_constraintTop_toBottomOf="@id/description"
+        app:layout_constraintVertical_bias="0.375">
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/optionList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="28dp" />
+
+    </LinearLayout>
+
     <Button
         android:visibility="invisible"
         android:id="@+id/btnSubmit"
+        android:background="@drawable/primarybtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Submit"

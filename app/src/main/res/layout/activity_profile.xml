@@ -41,21 +41,21 @@
         </LinearLayout>
 
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:padding="10dp"
-            android:layout_marginTop="5dp"
-            android:id="@+id/textField6"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+<!--        <com.google.android.material.textfield.TextInputLayout-->
+<!--            android:padding="10dp"-->
+<!--            android:layout_marginTop="5dp"-->
+<!--            android:id="@+id/textField6"-->
+<!--            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content">-->
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/customdate"
-                android:hint="Today's Date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+<!--            <com.google.android.material.textfield.TextInputEditText-->
+<!--                android:id="@+id/customdate"-->
+<!--                android:hint="Today's Date"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"/>-->
 
-        </com.google.android.material.textfield.TextInputLayout>
+<!--        </com.google.android.material.textfield.TextInputLayout>-->
 
         <com.google.android.material.textfield.TextInputLayout
             android:padding="10dp"
@@ -70,6 +70,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/numberOfEntries"
                 android:layout_width="match_parent"
+                android:inputType="number"
                 android:layout_height="wrap_content"/>
 
         </com.google.android.material.textfield.TextInputLayout>

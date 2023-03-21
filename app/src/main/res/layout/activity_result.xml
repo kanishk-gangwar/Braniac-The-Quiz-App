@@ -13,7 +13,7 @@
         <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="0dp"
-            android:layout_height="240dp"
+            android:layout_height="wrap_content"
             android:background="#BF4813"
             android:gravity="center"
             android:orientation="vertical"
@@ -21,13 +21,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/trophy"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                app:srcCompat="@drawable/award"/>
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_margin="20dp"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center_horizontal"
+                app:lottie_rawRes="@raw/congrats"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"/>
+
+<!--            <ImageView-->
+<!--                android:id="@+id/trophy"-->
+<!--                android:layout_width="120dp"-->
+<!--                android:layout_height="120dp"-->
+<!--                app:srcCompat="@drawable/award"/>-->
 
             <TextView
+                android:layout_margin="10dp"
                 android:id="@+id/txtScore"
                 style="@style/TextAppearance.AppCompat.Headline"
                 android:layout_width="match_parent"

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/gradientbackground"
+    tools:context=".activities.KeyReviewActivity">
+
+
+    <TextView
+        android:textStyle="bold"
+        android:textSize="50dp"
+        android:textColor="@color/black"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Welcome back!!"/>
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Spinner
+            android:background="@drawable/option_item_selected_bg"
+            android:padding="5dp"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:id="@+id/reviewspinner"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+
+
+    <Button
+        android:layout_marginTop="10dp"
+        android:id="@+id/keybtn"
+        android:layout_gravity="center_horizontal"
+        android:text="Search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/keyRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

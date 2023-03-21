@@ -7,5 +7,6 @@ data class Questions(
     var option3 : String = "",
     var option4 : String = "",
     var answer : String = "",
-    var userAnswer : String = ""
+    var userAnswer : String = "",
+    var Category : String = ""
 )

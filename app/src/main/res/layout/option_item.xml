@@ -3,10 +3,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="#A5A2A2"
     android:id="@+id/OptionContainer"
     android:layout_marginTop="8dp">
     
     <TextView
+
+        android:layout_margin="10dp"
         android:id="@+id/QuizOption"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

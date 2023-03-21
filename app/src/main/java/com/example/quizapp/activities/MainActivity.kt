@@ -146,6 +146,10 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this, LeaderBoard::class.java)
                     startActivity(intent)
                 }
+                R.id.btnreview -> {
+                    val intent = Intent(this,AdminLogin::class.java)
+                    startActivity(intent)
+                }
             }
             true
         }

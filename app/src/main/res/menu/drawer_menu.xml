@@ -24,5 +24,10 @@
         android:icon="@drawable/leaderboard"
         android:id="@+id/btnLeaderBoard"/>
 
+    <item
+        android:title="review questions"
+        android:icon="@drawable/star_review_icon"
+        android:id="@+id/btnreview"/>
+
 
 </menu>

@@ -21,8 +21,8 @@ import com.example.quizapp.R
 import com.example.quizapp.R.*
 import com.example.quizapp.activities.models.spinner
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
+import com.google.firebase.database.ktx.database
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -50,36 +50,18 @@ class ProfileActivity : AppCompatActivity() {
         setContentView(layout.activity_profile)
 
         getQuestions() // to add number of questions needed
-         dateselector()
+
         saveQuestions() // save questions to database
 
 
         Save.setOnClickListener {
 
-            CreateQuiz()
+          //  CreateQuiz()
+            saveQuizToRealtimeDatabase(numberOfEntries)
 
         }
     }
 
-    private fun dateselector() {
-        // Get the current date
-        val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
-
-// Format the date as a string
-        val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-        val dateString = dateFormat.format(calendar.time)
-
-// Set the string as the text of your EditText
-        customdate.setText(dateString)
-
-        customdate.isEnabled = false
-
-
-
-    }
 
     private var selectedCategory: String = ""
 
@@ -107,6 +89,8 @@ class ProfileActivity : AppCompatActivity() {
 
     }
 
+
+
     private fun getQuestions() {
         val container: LinearLayout = findViewById(id.editTextContainer)
         val generateButton: Button = findViewById(id.generateButton)
@@ -124,28 +108,10 @@ class ProfileActivity : AppCompatActivity() {
 
 
             }
-//            val etdate = customdate.text.toString()
-//            var date = spinner(etdate)
-//            dbref.child(selectedCategory).child(etdate).setValue(date)
-//                .addOnCompleteListener {
-//                    Toast.makeText(this@ProfileActivity,"Data Inserted Successfully",Toast.LENGTH_SHORT).show()
-//                }
-//                .addOnFailureListener {
-//                    Toast.makeText(this@ProfileActivity,"Error $err",Toast.LENGTH_SHORT).show()
-//                }
-//
-
-//            val etdate = customdate.text.toString()
-//            val date = spinner(etdate)
-//            dbref = FirebaseDatabase.getInstance().getReference("Category")
-//            dbref.child(selectedCategory).child(etdate).setValue(etdate)
-
-
 
         }
 
     }
-
 
 
     private fun CreateQuiz() {
@@ -165,19 +131,6 @@ class ProfileActivity : AppCompatActivity() {
                 val option3 = view.findViewById<EditText>(id.option3).text.toString()
                 val option4 = view.findViewById<EditText>(id.option4).text.toString()
                 val answer = view.findViewById<EditText>(id.correctAnswer).text.toString()
-
-
-                // to move focus on next
-//                setFocusChain(
-//                    view.findViewById(id.description),
-//                    view.findViewById(id.option1),
-//                    view.findViewById(id.option2),
-//                    view.findViewById(id.option3),
-//                    view.findViewById(id.option4),
-//                    view.findViewById(id.correctAnswer),
-//                    if (i == numberOfEntries - 1) doneButton else null,
-//                    if (i < numberOfEntries - 1) editTextContainer.getChildAt(i + 1) else null
-//                )
 
 
 
@@ -207,6 +160,7 @@ class ProfileActivity : AppCompatActivity() {
 
         Toast.makeText(this,"Quiz Saved successfully",Toast.LENGTH_SHORT).show()
 
+
         // Clear the EditText fields
         for (i in 0 until numberOfEntries) {
             val view = editTextContainer.getChildAt(i)
@@ -223,19 +177,58 @@ class ProfileActivity : AppCompatActivity() {
 
     }
 
-    private fun setFocusChain(description: EditText, option1: EditText, option2: EditText, option3: EditText, option4: EditText, answer: EditText, nextView: View?) {
-        description.nextFocusDownId = option1.id
-        option1.nextFocusDownId = option2.id
-        option2.nextFocusDownId = option3.id
-        option3.nextFocusDownId = option4.id
-        answer.nextFocusDownId = if (nextView == null) {
-            // Last field, so move focus to the next view
-            View.NO_ID
-        } else {
-            // Move focus to the next field
-            nextView.findViewById<EditText>(R.id.description).id
+    private fun saveQuizToRealtimeDatabase(numberOfQuestions: Int) {
+        val database = Firebase.database
+        val dateFormat = SimpleDateFormat("dd-MM-yyyy")
+        val title = dateFormat.format(Date())
+
+        val questions = mutableMapOf<String, Any>()
+        for (i in 1..numberOfQuestions) {
+            val view = editTextContainer.getChildAt(i - 1)
+
+            val description = view.findViewById<EditText>(R.id.description).text.toString()
+            val option1 = view.findViewById<EditText>(R.id.option1).text.toString()
+            val option2 = view.findViewById<EditText>(R.id.option2).text.toString()
+            val option3 = view.findViewById<EditText>(R.id.option3).text.toString()
+            val option4 = view.findViewById<EditText>(R.id.option4).text.toString()
+            val answer = view.findViewById<EditText>(R.id.correctAnswer).text.toString()
+
+            if (description.isEmpty() || option1.isEmpty() || option2.isEmpty() || option3.isEmpty() || option4.isEmpty() || answer.isEmpty()) {
+                // Show error message and return without saving
+                Toast.makeText(
+                    this,
+                    "Please fill in all fields for question $i",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return
+            }
+
+            val question = hashMapOf(
+                "description" to description,
+                "option1" to option1,
+                "option2" to option2,
+                "option3" to option3,
+                "option4" to option4,
+                "answer" to answer,
+                "Category" to selectedCategory
+            )
+            questions["question$i"] = question
         }
+
+        val quiz = hashMapOf(
+            "category" to selectedCategory,
+            "questions" to questions
+        )
+
+        val databaseRef = database.getReference("Quizzes").child(selectedCategory)
+        databaseRef.push().setValue(questions)
+
+        Toast.makeText(this, "Quiz gone for Review", Toast.LENGTH_SHORT).show()
+
     }
+
+
+
 
 
 
