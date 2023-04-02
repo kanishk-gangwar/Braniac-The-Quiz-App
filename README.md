@@ -2,6 +2,8 @@
 
 Braniac Quiz App is a simple quiz application built using Kotlin for Android. It allows users to test their knowledge on various topics by answering multiple-choice questions.
 
+![Alt Text](appLogo.png)
+
 ## Features
 
 - User authentication: users can create an account and log in to the application.
